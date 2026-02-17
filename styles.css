@@ -285,6 +285,34 @@ main {
   color: #143d67;
 }
 
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.contact-grid h3 {
+  margin: 0 0 0.45rem;
+  font-family: "Cardo", serif;
+  font-size: 1.12rem;
+  color: #1f1e1b;
+}
+
+.contact-grid p {
+  margin: 0 0 0.65rem;
+}
+
+.contact-meta {
+  margin: 0.24rem 0 0;
+  font-size: 1.03rem;
+  color: #2c3f56;
+}
+
+.contact-meta a {
+  color: #143d67;
+}
+
 .profile-identity {
   display: none;
 }
@@ -395,9 +423,9 @@ body.mode-modern .hero-card {
   border-radius: 1.35rem;
   text-align: left;
   z-index: 3;
-  background: linear-gradient(145deg, rgba(9, 22, 39, 0.82), rgba(13, 32, 55, 0.64));
+  background: linear-gradient(145deg, rgba(9, 22, 39, 0.96), rgba(13, 32, 55, 0.94));
   border: 1px solid rgba(191, 224, 250, 0.44);
-  backdrop-filter: blur(8px);
+  backdrop-filter: none;
   box-shadow:
     0 24px 58px rgba(6, 15, 28, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
@@ -495,37 +523,44 @@ body.mode-modern main {
 }
 
 body.mode-modern main.tabbed-main {
-  max-width: 1220px;
+  max-width: 1360px;
   margin: 1.35rem auto 4.8rem;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+  gap: 1rem 1.35rem;
+  align-items: start;
 }
 
-body.mode-modern main.tabbed-main .content-block {
+body.mode-modern main.tabbed-main > section.content-block:not(#vitae) {
   display: none;
-  width: 100%;
+  grid-column: 2;
   border-left: 0;
   padding: 1.3rem 1.2rem;
 }
 
-body.mode-modern main.tabbed-main .content-block.is-active-section {
+body.mode-modern main.tabbed-main > section.content-block:not(#vitae).is-active-section {
   display: block;
 }
 
-body.mode-modern main.tabbed-main #vitae {
-  text-align: left;
-}
-
-body.mode-modern main.tabbed-main #vitae h2 {
+body.mode-modern main.tabbed-main > #vitae {
   display: block;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  text-align: center;
 }
 
-body.mode-modern main.tabbed-main #vitae .profile-identity {
+body.mode-modern main.tabbed-main > #vitae h2 {
   display: none;
 }
 
-body.mode-modern main.tabbed-main #vitae .quick-link {
-  width: auto;
-  text-align: left;
+body.mode-modern main.tabbed-main > #vitae .profile-identity {
+  display: block;
+}
+
+body.mode-modern main.tabbed-main > #vitae .quick-link {
+  width: 100%;
+  text-align: center;
 }
 
 body.mode-modern main.tabbed-main #selected-papers {
@@ -568,6 +603,27 @@ body.mode-modern .content-block h2::after {
 body.mode-modern .content-block p {
   color: #2e4561;
   line-height: 1.65;
+}
+
+body.mode-modern .contact-grid h3 {
+  font-family: "Libre Baskerville", "Cardo", serif;
+  color: #122b45;
+}
+
+body.mode-modern .contact-meta {
+  color: #2e4561;
+}
+
+body.mode-modern .contact-meta a {
+  color: #0d4f80;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(13, 79, 128, 0.35);
+}
+
+body.mode-modern .contact-meta a:hover,
+body.mode-modern .contact-meta a:focus-visible {
+  color: #09375b;
+  border-bottom-color: rgba(9, 55, 91, 0.55);
 }
 
 body.mode-modern :is(#vitae, #contact, #arrow-lecture, #lectures-social-interactions, #agenda-perdida) {
@@ -621,6 +677,24 @@ body.mode-modern #vitae .profile-role {
   line-height: 1.45;
 }
 
+body.mode-modern #vitae .profile-biography {
+  margin-top: 1rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid #d8e4ee;
+  text-align: left;
+}
+
+body.mode-modern #vitae .profile-biography p {
+  margin: 0 0 0.82rem;
+  color: #2f4962;
+  font-size: 0.93rem;
+  line-height: 1.58;
+}
+
+body.mode-modern #vitae .profile-biography p:last-child {
+  margin-bottom: 0;
+}
+
 body.mode-modern #vitae > p {
   margin-top: 0.92rem;
 }
@@ -645,11 +719,6 @@ body.mode-modern #lectures-social-interactions {
 
 body.mode-modern #agenda-perdida {
   grid-row: 5;
-}
-
-body.mode-modern #short-biography {
-  grid-column: 2;
-  grid-row: 1;
 }
 
 body.mode-modern #selected-papers {
@@ -833,10 +902,19 @@ body.mode-modern .small-note {
     gap: 0.9rem;
   }
 
-  body.mode-modern :is(#vitae, #contact, #arrow-lecture, #lectures-social-interactions, #agenda-perdida, #short-biography, #selected-papers) {
+  body.mode-modern :is(#vitae, #contact, #arrow-lecture, #lectures-social-interactions, #agenda-perdida, #selected-papers) {
     grid-column: 1;
     grid-row: auto;
     position: static;
+  }
+
+  body.mode-modern main.tabbed-main {
+    max-width: 920px;
+    display: block;
+  }
+
+  body.mode-modern main.tabbed-main > #vitae {
+    margin-bottom: 0.9rem;
   }
 
   body.mode-modern #selected-papers {
@@ -912,5 +990,12 @@ body.mode-modern .small-note {
   body.mode-modern #selected-papers .plain-list li::before {
     left: 0.72rem;
     top: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
   }
 }

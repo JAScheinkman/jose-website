@@ -6,7 +6,7 @@
   var defaultSectionId = "selected-papers";
   var main = document.querySelector("main");
   var navLinks = document.querySelectorAll('.top-nav a[href^="#"]');
-  var sections = document.querySelectorAll("main > section.content-block[id]");
+  var sections = document.querySelectorAll('main > section.content-block[id]:not(#vitae)');
 
   function sectionExists(sectionId) {
     return Array.prototype.some.call(sections, function (section) {
