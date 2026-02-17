@@ -52,20 +52,6 @@
       return;
     }
 
-    var isModern = body.classList.contains("mode-modern");
-
-    if (!isModern) {
-      main.classList.remove("tabbed-main");
-      Array.prototype.forEach.call(sections, function (section) {
-        section.classList.remove("is-active-section");
-      });
-      Array.prototype.forEach.call(navLinks, function (link) {
-        link.classList.remove("is-current");
-        link.removeAttribute("aria-current");
-      });
-      return;
-    }
-
     main.classList.add("tabbed-main");
 
     var hashSection = sectionFromHash();
@@ -106,10 +92,6 @@
 
   Array.prototype.forEach.call(navLinks, function (link) {
     link.addEventListener("click", function (event) {
-      if (!body.classList.contains("mode-modern")) {
-        return;
-      }
-
       var href = link.getAttribute("href") || "";
       var targetSectionId = href.charAt(0) === "#" ? href.slice(1) : "";
 
@@ -123,10 +105,6 @@
   });
 
   window.addEventListener("hashchange", function () {
-    if (!body.classList.contains("mode-modern")) {
-      return;
-    }
-
     var hashSectionId = sectionFromHash();
     if (sectionExists(hashSectionId)) {
       setActiveSection(hashSectionId, false);

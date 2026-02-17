@@ -186,6 +186,31 @@ body {
   color: #ffffff;
 }
 
+body.mode-legacy .top-nav a.is-current,
+body.mode-legacy .top-nav a.is-current:hover,
+body.mode-legacy .top-nav a.is-current:focus-visible {
+  color: #ffffff;
+}
+
+body.mode-legacy main.tabbed-main {
+  max-width: 1040px;
+  margin: 3.1rem auto 4rem;
+  padding: 0 1.1rem;
+  display: block;
+}
+
+body.mode-legacy main.tabbed-main > #vitae {
+  display: none;
+}
+
+body.mode-legacy main.tabbed-main > section.content-block {
+  display: none;
+}
+
+body.mode-legacy main.tabbed-main > section.content-block.is-active-section {
+  display: block;
+}
+
 main {
   max-width: 1040px;
   margin: 3.1rem auto 4rem;
@@ -423,7 +448,7 @@ body.mode-modern .hero-card {
   border-radius: 1.35rem;
   text-align: left;
   z-index: 3;
-  background: linear-gradient(145deg, rgba(9, 22, 39, 0.96), rgba(13, 32, 55, 0.94));
+  background: linear-gradient(145deg, #091627, #0d2037);
   border: 1px solid rgba(191, 224, 250, 0.44);
   backdrop-filter: none;
   box-shadow:
@@ -524,7 +549,7 @@ body.mode-modern main {
 
 body.mode-modern main.tabbed-main {
   max-width: 1360px;
-  margin: 1.35rem auto 4.8rem;
+  margin: 0.95rem auto 4.8rem;
   display: grid;
   grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
   gap: 1rem 1.35rem;
@@ -534,6 +559,8 @@ body.mode-modern main.tabbed-main {
 body.mode-modern main.tabbed-main > section.content-block:not(#vitae) {
   display: none;
   grid-column: 2;
+  grid-row: 1;
+  align-self: start;
   border-left: 0;
   padding: 1.3rem 1.2rem;
 }
@@ -546,6 +573,8 @@ body.mode-modern main.tabbed-main > #vitae {
   display: block;
   grid-column: 1;
   grid-row: 1;
+  position: sticky;
+  top: 5.2rem;
   align-self: start;
   text-align: center;
 }
@@ -565,6 +594,12 @@ body.mode-modern main.tabbed-main > #vitae .quick-link {
 
 body.mode-modern main.tabbed-main #selected-papers {
   padding: 1.45rem 1.3rem;
+}
+
+body.mode-modern main.tabbed-main > :is(#selected-papers, #contact, #arrow-lecture, #lectures-social-interactions, #agenda-perdida) {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
 }
 
 body.mode-modern .content-block {
@@ -914,6 +949,8 @@ body.mode-modern .small-note {
   }
 
   body.mode-modern main.tabbed-main > #vitae {
+    position: static;
+    top: auto;
     margin-bottom: 0.9rem;
   }
 
