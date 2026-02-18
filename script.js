@@ -47,7 +47,7 @@
       return "";
     }
 
-    var match = textNode.textContent.match(/^\s*\((with[^)]+)\)\.?\s*/i);
+    var match = textNode.textContent.match(/^\s*\((with[^)]+)\)\s*(?:[.,;:]\s*)?/i);
     if (!match) {
       return "";
     }
@@ -83,6 +83,7 @@
 
       normalizeLeadingComma(meta);
       var coauthorText = extractLeadingCoauthors(meta);
+      normalizeLeadingComma(meta);
       item.appendChild(meta);
 
       if (coauthorText) {
