@@ -218,7 +218,7 @@ a:focus-visible {
 
 .hero {
   position: relative;
-  min-height: clamp(24rem, 52vh, 28rem);
+  min-height: clamp(22.5rem, 48vh, 26.5rem);
   border-radius: 1rem;
   overflow: hidden;
   margin-bottom: 1rem;
