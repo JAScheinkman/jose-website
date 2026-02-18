@@ -7,6 +7,7 @@
   var main = document.querySelector("main");
   var navLinks = document.querySelectorAll('.top-nav a[href^="#"]');
   var sections = document.querySelectorAll("main > section.content-block[id]");
+  var paperCards = document.querySelectorAll("#selected-papers .plain-list li");
 
   function sectionExists(sectionId) {
     return Array.prototype.some.call(sections, function (section) {
@@ -19,6 +20,105 @@
       return "";
     }
     return window.location.hash.slice(1);
+  }
+
+  function firstMeaningfulTextNode(container) {
+    var child = container.firstChild;
+    while (child) {
+      if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
+        return child;
+      }
+      child = child.nextSibling;
+    }
+    return null;
+  }
+
+  function normalizeLeadingComma(container) {
+    var textNode = firstMeaningfulTextNode(container);
+    if (!textNode) {
+      return;
+    }
+    textNode.textContent = textNode.textContent.replace(/^\s*,\s*/, "");
+  }
+
+  function extractLeadingCoauthors(container) {
+    var textNode = firstMeaningfulTextNode(container);
+    if (!textNode) {
+      return "";
+    }
+
+    var match = textNode.textContent.match(/^\s*\((with[^)]+)\)\.?\s*/i);
+    if (!match) {
+      return "";
+    }
+
+    textNode.textContent = textNode.textContent.replace(match[0], "");
+    return match[1].replace(/^with/i, "With").trim();
+  }
+
+  function enhanceSelectedPapers() {
+    Array.prototype.forEach.call(paperCards, function (item) {
+      var titleLink = item.querySelector("a[href]");
+      if (!titleLink) {
+        return;
+      }
+
+      var href = titleLink.getAttribute("href");
+      if (!href) {
+        return;
+      }
+
+      var titleText = titleLink.textContent.trim();
+      var openInNewTab = titleLink.getAttribute("target") === "_blank";
+      var titleElement = document.createElement("p");
+      titleElement.className = "paper-title";
+      titleElement.textContent = titleText;
+      titleLink.replaceWith(titleElement);
+
+      var meta = document.createElement("div");
+      meta.className = "paper-meta";
+      while (titleElement.nextSibling) {
+        meta.appendChild(titleElement.nextSibling);
+      }
+
+      normalizeLeadingComma(meta);
+      var coauthorText = extractLeadingCoauthors(meta);
+      item.appendChild(meta);
+
+      if (coauthorText) {
+        var coauthorLine = document.createElement("p");
+        coauthorLine.className = "paper-coauthors";
+        coauthorLine.textContent = coauthorText;
+        item.insertBefore(coauthorLine, meta);
+      }
+
+      item.classList.add("paper-card");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("role", "link");
+      item.setAttribute("aria-label", "Open paper: " + titleText);
+
+      function openPaper() {
+        if (openInNewTab) {
+          window.open(href, "_blank", "noopener,noreferrer");
+          return;
+        }
+        window.location.href = href;
+      }
+
+      item.addEventListener("click", function (event) {
+        if (event.target && typeof event.target.closest === "function" && event.target.closest("a")) {
+          return;
+        }
+        openPaper();
+      });
+
+      item.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openPaper();
+        }
+      });
+    });
   }
 
   function setActiveSection(sectionId, syncHash) {
@@ -78,6 +178,8 @@
 
     syncSectionBehaviorForView();
   }
+
+  enhanceSelectedPapers();
 
   var storedMode = localStorage.getItem(storageKey);
   setView(storedMode === "legacy" ? "legacy" : "modern");
