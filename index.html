@@ -27,28 +27,8 @@
       </button>
     </div>
 
-    <header class="hero" id="top">
-      <div class="hero-overlay"></div>
-      <div class="hero-card">
-        <h1>José A. Scheinkman</h1>
-        <div class="hero-divider"></div>
-        <p>Charles and Lynn Zhang Professor of Economics | Columbia University</p>
-      </div>
-    </header>
-
-    <nav class="top-nav" aria-label="Main Navigation">
-      <ul>
-        <li><a href="#vitae">Vitae</a></li>
-        <li><a href="#selected-papers">Selected Papers</a></li>
-        <li><a href="#arrow-lecture">Arrow Lecture: Speculation, Trading, and Bubbles</a></li>
-        <li><a href="#lectures-social-interactions">Lectures on Social Interactions</a></li>
-        <li><a href="#agenda-perdida">Agenda Perdida</a></li>
-        <li><a href="#contact">Contact Me</a></li>
-      </ul>
-    </nav>
-
-    <aside class="profile-pane" aria-label="Profile">
-      <div class="profile-identity">
+    <div class="site-layout">
+      <aside class="profile-pane" aria-label="Profile">
         <img src="assets/photo-jose.jpg" alt="Portrait of José A. Scheinkman" class="profile-photo" />
         <p class="profile-name">José A. Scheinkman</p>
         <p class="profile-role">Charles and Lynn Zhang Professor of Economics</p>
@@ -70,19 +50,40 @@
             asset-price bubbles.
           </p>
         </div>
-      </div>
-      <p>
-        <a
-          class="quick-link"
-          href="https://www.dropbox.com/sh/87lujfndw6c23ju/AACGSeeCDWaHbvzDrgdcw4wha?dl=0"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Open CV (Dropbox)</a
-        >
-      </p>
-    </aside>
+        <p>
+          <a
+            class="quick-link"
+            href="https://www.dropbox.com/sh/87lujfndw6c23ju/AACGSeeCDWaHbvzDrgdcw4wha?dl=0"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Open CV (Dropbox)</a
+          >
+        </p>
+      </aside>
 
-    <main>
+      <div class="main-column">
+        <header class="hero" id="top">
+          <div class="hero-overlay"></div>
+          <div class="hero-card">
+            <h1>José A. Scheinkman</h1>
+            <div class="hero-divider"></div>
+            <p>Charles and Lynn Zhang Professor of Economics | Columbia University</p>
+          </div>
+        </header>
+
+        <div class="content-rail">
+          <nav class="top-nav" aria-label="Main Navigation">
+            <ul>
+              <li><a href="#vitae">Vitae</a></li>
+              <li><a href="#selected-papers">Selected Papers</a></li>
+              <li><a href="#arrow-lecture">Arrow Lecture: Speculation, Trading, and Bubbles</a></li>
+              <li><a href="#lectures-social-interactions">Lectures on Social Interactions</a></li>
+              <li><a href="#agenda-perdida">Agenda Perdida</a></li>
+              <li><a href="#contact">Contact Me</a></li>
+            </ul>
+          </nav>
+
+          <main>
       <section id="vitae" class="content-block">
         <h2>Vitae</h2>
         <p>
@@ -749,7 +750,10 @@
         </p>
         <p class="contact-meta">Tel: (212) 854-3679 (direct) / 2507 (asst.)</p>
       </section>
-    </main>
+          </main>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
